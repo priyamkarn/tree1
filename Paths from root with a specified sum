@@ -1,0 +1,29 @@
+ void solve(Node *root,vector<int>temp,vector<vector<int>>&ans,int sum)
+ {
+     if(root==NULL)
+     {
+         return;
+     }
+     temp.push_back(root->key);
+     if(sum==root->key)
+     {
+        
+         ans.push_back(temp);
+         return;
+     }
+     else if(sum>0)
+     {
+     solve(root->left,temp,ans,sum-root->key);
+     solve(root->right,temp,ans,sum-root->key);
+     temp.pop_back();
+     }
+     return;
+ }
+    vector<vector<int>> printPaths(Node *root, int sum)
+    {
+        //code here
+    vector<int>temp;
+    vector<vector<int>>ans;
+    solve(root,temp,ans,sum);
+    return ans;
+    }
