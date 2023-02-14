@@ -1,0 +1,28 @@
+ void solve(Node *root,int sum,int &ans)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        sum+=root->data;
+        if(root->left==NULL && root->right==NULL)
+        {
+            ans=max(ans,sum);
+            return;
+        }
+        else
+        {
+            solve(root->left,sum,ans);
+            solve(root->right,sum,ans);
+        }
+        sum-=root->data;
+    }
+    int maxPathSum(Node* root)
+    {
+        //code here
+        int sum=0;
+        int ans=INT_MIN;
+        solve(root,sum,ans);
+        return ans;
+        
+    }
