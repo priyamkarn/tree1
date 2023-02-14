@@ -1,0 +1,20 @@
+This code defines a TreeNode structure for the nodes in the BST, and a function lowestCommonAncestor that takes the root node of 
+the BST and two nodes p and q whose lowest common ancestor is to be found. The function recursively searches for the lowest common ancestor
+by comparing the values of the current node and p and q. If the current node is larger than both p and q, then the lowest common ancestor must be
+in the left subtree. If the current node is smaller than both p and q, then the lowest common ancestor must be in the right subtree. 
+Otherwise, the current node is the lowest common ancestor. 
+The code also includes a main function that creates a sample BST and tests the lowestCommonAncestor function.
+If the current node value is greater than p and smaller than q, it means that p and q are in different subtrees with respect to the current node. 
+Therefore, the current node must be the lowest common ancestor of p and q.
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+    if (root == nullptr) {
+        return nullptr;
+    }
+    if (root->val > p->val && root->val > q->val) {
+        return lowestCommonAncestor(root->left, p, q);
+    }
+    if (root->val < p->val && root->val < q->val) {
+        return lowestCommonAncestor(root->right, p, q);
+    }
+    return root;(current node)
+}
