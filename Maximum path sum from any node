@@ -1,0 +1,21 @@
+int solve(Node* root, int& ans) {
+    if (root == nullptr) {
+        return 0;
+    }
+
+    int left_sum = solve(root->left, ans);
+    int right_sum = solve(root->right, ans);
+
+    int max_sum = max(max(left_sum, right_sum) + root->data, root->data);
+    int root_sum = max(max_sum, left_sum + right_sum + root->data);
+
+    ans = max(ans, root_sum);
+
+    return max_sum;
+}
+
+int findMaxSum(Node* root) {
+    int ans = INT_MIN;
+    solve(root, ans);
+    return ans;
+}
