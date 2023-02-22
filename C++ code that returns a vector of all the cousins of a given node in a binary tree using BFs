@@ -1,0 +1,49 @@
+vector<int> getCousins(TreeNode* root, int nodeVal) {
+    vector<int> cousins;
+    if (!root) {
+        return cousins;
+    }
+    queue<TreeNode*> q;
+    q.push(root);
+    while (!q.empty()) {
+        int size = q.size();
+        bool found = false;
+        for (int i = 0; i < size; ++i) {
+            TreeNode* curr = q.front();
+            q.pop();
+            if (curr->val == nodeVal) {
+                found = true;
+            } else {
+                if (curr->left) {
+                    q.push(curr->left);
+                }
+                if (curr->right) {
+                    q.push(curr->right);
+                }
+            }
+        }
+        if (found) {
+            for (int i = 0; i < size; ++i) {
+                TreeNode* curr = q.front();
+                q.pop();
+                if (curr->left && curr->right) {
+                    if (curr->left->val != nodeVal && curr->right->val != nodeVal) {
+                        cousins.push_back(curr->left->val);
+                        cousins.push_back(curr->right->val);
+                    }
+                } else if (curr->left) {
+                    if (curr->left->val != nodeVal) {
+                        cousins.push_back(curr->left->val);
+                    }
+                } else if (curr->right) {
+                    if (curr->right->val != nodeVal) {
+                        cousins.push_back(curr->right->val);
+                    }
+                }
+            }
+            break;
+        }
+    }
+    return cousins;
+}
+C++ code that returns a vector of all the cousins of a given node in a binary tree using BFs
