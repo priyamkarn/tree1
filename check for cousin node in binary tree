@@ -1,0 +1,40 @@
+bool isCousins(Node *root, int node1, int node2)
+{
+   //add code here.
+     if (!root) {
+        return false;
+    }
+    queue<Node*> q;
+    q.push(root);
+    while (!q.empty()) {
+        int size = q.size();
+        bool found1 = false, found2 = false;
+        for (int i = 0; i < size; ++i) {
+            Node* curr = q.front();
+            q.pop();
+            if (curr->data == node1) {
+                found1 = true;
+            }
+            if (curr->data == node2) {
+                found2 = true;
+            }
+            if (curr->left && curr->right) {
+                if ((curr->left->data == node1 && curr->right->data == node2) ||
+                    (curr->left->data == node2 && curr->right->data == node1)) {
+                    return false;
+                }
+            }
+            if (curr->left) {
+                q.push(curr->left);
+            }
+            if (curr->right) {
+                q.push(curr->right);
+            }
+        }
+        if (found1 && found2) {
+            return true;
+        }
+    }
+    return false;
+   
+}
