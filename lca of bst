@@ -18,3 +18,14 @@ TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
     }
     return root;(current node)
 }
+otherwise normal binary tree approach also works
+ iterative
+ while(root!=NULL)
+   {
+       if(root->data<n1 && root->data<n2)
+          root=root->right;
+       else if(root->data>n1 && root->data>n2)
+          root=root->left;
+        else
+          return root;
+}
