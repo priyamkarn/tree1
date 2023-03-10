@@ -30,3 +30,4 @@ vector<int> verticalOrder(Node *root)
         }
         return ans;
     }
+Therefore, in cases where the order of keys is important and the number of elements is not too large, using a map can be more efficient than using an unordered_map.
