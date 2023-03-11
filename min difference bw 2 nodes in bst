@@ -1,0 +1,17 @@
+void inorderTraversal(TreeNode* node, int& prev_val, int& min_diff) {
+        if (!node) {
+            return;
+        }
+        inorderTraversal(node->left, prev_val, min_diff);
+        if (prev_val != -1) {
+            min_diff = min(min_diff, node->val - prev_val);
+        }
+        prev_val = node->val;
+        inorderTraversal(node->right, prev_val, min_diff);
+    }
+    int minDiffInBST(TreeNode* root) {
+       int min_diff = INT_MAX;
+        int prev_val = -1; 
+        inorderTraversal(root, prev_val, min_diff);
+        return min_diff;
+    }
