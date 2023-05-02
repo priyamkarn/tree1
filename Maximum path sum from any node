@@ -1,21 +1,33 @@
-int solve(Node* root, int& ans) {
-    if (root == nullptr) {
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+int maxi=INT_MIN;
+int solve(TreeNode* root)
+{
+    if(root==NULL)
+    {
         return 0;
     }
-
-    int left_sum = solve(root->left, ans);
-    int right_sum = solve(root->right, ans);
-
-    int max_sum = max(max(left_sum, right_sum) + root->data, root->data);
-    int root_sum = max(max_sum, left_sum + right_sum + root->data);
-
-    ans = max(ans, root_sum);
-
-    return max_sum;
+    int l=solve(root->left);
+    int r=solve(root->right);
+    int neeche_mil_gya_ans=root->val+l+r;
+    int yhi_ans=root->val;
+    int koi_ek=root->val+max(l,r);
+    maxi=max(maxi,max(neeche_mil_gya_ans,max(yhi_ans,koi_ek)));
+    return max(koi_ek,yhi_ans);
 }
-
-int findMaxSum(Node* root) {
-    int ans = INT_MIN;
-    solve(root, ans);
-    return ans;
-}
+    int maxPathSum(TreeNode* root) {
+        solve(root);
+        return maxi;
+    }
+};
