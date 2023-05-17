@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int res = 0;
+    void findgoodnode(TreeNode* root, int path_max) {
+        if(!root) return;
+        if(root->val >= path_max) {
+            res++;
+            path_max = root->val;
+        }
+        findgoodnode(root->left, path_max);
+        findgoodnode(root->right, path_max);
+    }
+
+    int goodNodes(TreeNode* root) {
+        if(!root) return 0;
+        findgoodnode(root, root->val);
+        return res;
+    }
+};
